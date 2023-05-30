@@ -1,0 +1,79 @@
+.Test {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+.Naziv {
+  
+  overflow: visible;
+  width: 100%;
+  text-align: center;
+  color: rgb(45, 41, 41);
+}
+
+.Messages-list {
+  
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;  
+  flex-grow: 1;
+  
+}
+
+.Messages-message {
+  display: flex;
+  margin-top: 15px;
+}
+
+.Messages-message.currentMember {  
+  flex-direction: column;
+  text-align: right;
+}
+
+.Message-content > .username {
+  display: grid;
+  color: gray;
+  font-size: 16px;
+  padding-bottom: 2px;
+}
+
+.Message-content > .text {
+  padding: 10px;
+  max-width: 200px;
+  margin: 0;
+  border-radius: 20px;
+  background-color: rgb(89, 194, 223);
+  color: white;
+  display: inline-block;
+}
+
+.currentMember > .Message-content .text {
+  background-color: rgb(84, 218, 164);
+}
+
+form {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+input {
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 18px;
+  flex-grow: 1;
+}
+
+button {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: rgba(51, 61, 199);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  margin-left: 10px;
+}
