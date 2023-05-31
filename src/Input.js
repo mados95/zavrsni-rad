@@ -1,22 +1,25 @@
-import {Component} from "react";
-import React from "react";
+import React, { Component } from "react";
 
 class Input extends Component {
   state = {
-    text: ""
-  }
+    text: "",
+  };
 
   onChange(e) {
-    this.setState({text: e.target.value});
+    this.setState({ text: e.target.value });
   }
 
   onSubmit(e) {
     e.preventDefault();
-    this.setState({text: ""});
+    
+    if (this.state.text.trim() === "") {
+      alert("Upišite poruku.");
+      return;
+    }
+    
     this.props.onSendMessage(this.state.text);
+    this.setState({ text: "" });
   }
-
-  
 
   render() {
     return (
@@ -27,9 +30,9 @@ class Input extends Component {
             value={this.state.text}
             type="text"
             placeholder="Upiši tekst i pošalji"
-            autofocus="true"
+            autoFocus={true}
           />
-          <button>Pošalji</button>
+          <button type="submit">Pošalji</button>
         </form>
       </div>
     );

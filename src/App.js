@@ -12,6 +12,7 @@ function randomName() {
   
   return adjective;
 }
+
 function randomColor() {
   return '#' + Math.floor(Math.random() * 0xFFFF00).toString(16);
 }
@@ -25,8 +26,7 @@ class Test extends Component {
     }
   }
 
-  constructor() {
-    super();
+  componentDidMount() {
     this.drone = new window.Scaledrone("9iGlQL1k55G8iTfj", {
       data: this.state.member
     });
@@ -34,16 +34,24 @@ class Test extends Component {
       if (error) {
         return console.error(error);
       }
-      const member = {...this.state.member};
+      const member = { ...this.state.member };
       member.id = this.drone.clientId;
-      this.setState({member});
+      this.setState({ member });
+
+      this.drone.subscribe("observable-room").on('data', this.handleMessage);
     });
-    const room = this.drone.subscribe("observable-room");
-    room.on('data', (data, member) => {
-      const messages = this.state.messages;
-      messages.push({member, text: data});
-      this.setState({messages});
-    });
+  }
+
+  handleMessage = (data, member) => {
+    const message = {
+      member,
+      text: data,
+      key: Date.now()
+    };
+
+    this.setState(prevState => ({
+      messages: prevState.messages.concat(message)
+    }));
   }
 
   render() {
@@ -69,8 +77,6 @@ class Test extends Component {
       message
     });
   }
-
 }
 
 export default Test;
-
